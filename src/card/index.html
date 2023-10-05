@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			body {
+				font-family: 'Nunito', sans-serif;
+			}
+
+			p,
+			h3 {
+				margin: 0;
+				padding: 0;
+				color: #777980;
+			}
+
+			.wrapper {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
+
+			.container {
+				display: flex;
+				flex-direction: column;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				padding: 0 0 4px 0;
+			}
+
+			.container_title {
+				display: flex;
+				align-items: center;
+				background-color: #f9f9fb;
+				color: #777980;
+				padding: 0 8px;
+				height: 34px;
+				justify-content: space-between;
+				cursor: pointer;
+				transition: all 0.1s ease-in-out;
+			}
+
+			.container_title:hover {
+				color: #000;
+			}
+
+			.container_title span {
+				background-color: #f9f9fb;
+				border: none;
+				color: #777980;
+				font-size: 1.5rem;
+				cursor: pointer;
+				padding: 0 4px;
+			}
+
+			.container_body {
+				padding: 8px;
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 8px;
+				display: none;
+			}
+
+			.container_body-cell {
+				flex: 1 1 143px;
+				max-width: 143px;
+			}
+
+			.container_body-cell label {
+				font-size: 0.685rem;
+				color: #679ecb;
+				font-weight: 700;
+			}
+			.container_body-cell p {
+				font-weight: 500;
+			}
+
+			.chip {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				padding-left: 12px;
+				padding-right: 12px;
+				white-space: nowrap;
+				width: fit-content;
+				border-radius: 4px;
+				color: #fff;
+				font-size: 0.885rem;
+			}
+
+			.chip--success {
+				background-color: #4caf50;
+			}
+			.chip--error {
+				background-color: #f44336;
+			}
+			.chip--warning {
+				background-color: #ff9800;
+			}
+			.chip--info {
+				background-color: #2196f3;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper" class="wrapper"></div>
+		<script>
+			function expand(type) {
+				const el = document.getElementById(type);
+				const children = el.children[1];
+				const isVisible = children.style.display === 'flex';
+
+				if (isVisible) {
+					children.style.display = 'none';
+					el.children[0].children[1].innerHTML = '+';
+				} else {
+					children.style.display = 'flex';
+					el.children[0].children[1].innerHTML = '-';
+				}
+			}
+
+			const data = {
+				status: {
+					'Lista comprabacion historial': 'sí',
+					'Revision Fisica Status': 'none',
+					'Revision Laboratorio Status': 'scheduled',
+				},
+				journey: {
+					'Perfil completo': 'sí',
+					status: 'none',
+					'Requisito revision': 'scheduled',
+					'Puede editar genero': 'scheduled',
+					dependents: 'scheduled',
+				},
+			};
+
+			const fields = Object.keys(data);
+
+			const elements = fields.map((field) => {
+				const els = Object.keys(data[field]).map((key, index) => {
+					const yourLogicComesHereLeopoldo = {
+						none: 'chip chip--success',
+						scheduled: 'chip chip--warning',
+						complete: 'chip chip--info',
+						canceled: 'chip chip--error',
+					};
+					return `<div class="container_body-cell"><label>${key}</label><p class="${
+						yourLogicComesHereLeopoldo[data[field][key]]
+					}">${data[field][key]}</p></div>`;
+				});
+
+				return `<div id=${field} class="container" onclick="expand('${field}')">
+					<div class="container_title">
+						<h3>${field}</h3>
+						<span>+</span>
+					</div>
+					<div class="container_body">
+						${els.reduce((acc, curr) => acc + curr, '')}
+					</div>
+				</div>`;
+			});
+
+			document.getElementById('wrapper').innerHTML = elements.reduce(
+				(acc, curr) => acc + curr,
+				'',
+			);
+		</script>
+	</body>
+</html>
