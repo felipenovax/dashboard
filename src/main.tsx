@@ -8,7 +8,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<GlobalProvider>
-			<GlobalStyle $theme="purple" />
+			<GlobalStyle $theme="blue" />
 			<App />
 		</GlobalProvider>
 	</React.StrictMode>,

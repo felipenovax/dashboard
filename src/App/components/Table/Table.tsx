@@ -1,24 +1,35 @@
 import { Fragment, useState } from 'react';
 import { BiDownArrowAlt, BiUpArrowAlt } from 'react-icons/bi';
 import { Checkbox } from '../Checkbox/Checkbox';
-import { HeaderItem, Row, TableElement, TableHeader } from './Table.styles';
+import {
+	Container,
+	HeaderItem,
+	Row,
+	TableElement,
+	TableHeader,
+	Wrapper,
+} from './Table.styles';
 import { Footer } from './components/Footer/Footer';
 
-export const Table = ({
-	headers,
-	rows,
-}: {
+interface ITable {
 	headers: { key: string; value: string; width: string }[];
 	rows: { [key: string]: any }[];
-}) => {
-	const [sortedBy, setSortedBy] = useState<{
-		slug: string;
-		order: 'asc' | 'desc';
-	}>({
+}
+
+type TableRowsProps = { [key: string]: any }[];
+
+type SortProps = {
+	slug: string;
+	order: 'asc' | 'desc';
+};
+
+export const Table = ({ headers, rows }: ITable) => {
+	const [sortedBy, setSortedBy] = useState<SortProps>({
 		slug: '',
 		order: 'desc',
 	});
-	const [tableRows, setTableRows] = useState<{ [key: string]: any }[]>(rows);
+	const [tableRows, setTableRows] = useState<TableRowsProps>(rows);
+	const [selectedRows, setSelectedRows] = useState<TableRowsProps>([]);
 
 	const textContent = (elem: React.ReactElement | string): string => {
 		if (!elem) {
@@ -59,58 +70,60 @@ export const Table = ({
 	};
 
 	return (
-		<div style={{ overflowX: 'hidden' }}>
-			<div style={{ overflowX: 'auto' }}>
+		<Wrapper>
+			<Container>
 				<TableElement id="myTable">
 					<thead>
 						<tr>
-							<>
-								<TableHeader style={{ width: '40px' }}>
-									<Checkbox />
+							<TableHeader width="40px">
+								<Checkbox
+									checked={true}
+									onChange={(value) => console.log(value)}
+								/>
+							</TableHeader>
+							{headers.map((header) => (
+								<TableHeader key={header.key} width={header.width}>
+									<HeaderItem>
+										<Fragment key={header.key}>{header.value}</Fragment>
+										{sortedBy.order === 'asc' &&
+										sortedBy.slug === header.key ? (
+											<BiDownArrowAlt
+												className={
+													sortedBy.slug === header.key && 'sort-icon-active'
+												}
+												onClick={() => sortTable(header.key)}
+											/>
+										) : (
+											<BiUpArrowAlt
+												onClick={() => sortTable(header.key)}
+												className={
+													sortedBy.slug === header.key && 'sort-icon-active'
+												}
+											/>
+										)}
+									</HeaderItem>
 								</TableHeader>
-								{headers.map((header) => (
-									<TableHeader key={header.key} style={{ width: header.width }}>
-										<HeaderItem>
-											<Fragment key={header.key}>{header.value}</Fragment>
-											{sortedBy.order === 'asc' &&
-											sortedBy.slug === header.key ? (
-												<BiDownArrowAlt
-													className={
-														sortedBy.slug === header.key && 'sort-icon-active'
-													}
-													onClick={() => sortTable(header.key)}
-												/>
-											) : (
-												<BiUpArrowAlt
-													onClick={() => sortTable(header.key)}
-													className={
-														sortedBy.slug === header.key && 'sort-icon-active'
-													}
-												/>
-											)}
-										</HeaderItem>
-									</TableHeader>
-								))}
-							</>
+							))}
 						</tr>
 					</thead>
 					{tableRows.map((row, index) => (
 						<tbody key={index}>
 							<Row>
-								<>
-									<td>
-										<Checkbox />
-									</td>
-									{headers.map((header) => (
-										<td key={header.key}>{row[header.key]}</td>
-									))}
-								</>
+								<td>
+									<Checkbox
+										checked={false}
+										onChange={(value) => console.log(value)}
+									/>
+								</td>
+								{headers.map((header) => (
+									<td key={header.key}>{row[header.key]}</td>
+								))}
 							</Row>
 						</tbody>
 					))}
 				</TableElement>
-			</div>
+			</Container>
 			<Footer />
-		</div>
+		</Wrapper>
 	);
 };

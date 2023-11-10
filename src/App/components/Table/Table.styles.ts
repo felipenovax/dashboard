@@ -1,5 +1,17 @@
 import styled from 'styled-components';
 
+type TableHeaderProps = {
+	width?: string;
+};
+
+export const Wrapper = styled.div`
+	overflow-x: hidden;
+`;
+
+export const Container = styled.div`
+	overflow-x: auto;
+`;
+
 export const TableElement = styled.table`
 	width: 100%;
 	border: 1px #ddd;
@@ -52,10 +64,11 @@ export const TableElement = styled.table`
 	}
 `;
 
-export const TableHeader = styled.th`
+export const TableHeader = styled.th<TableHeaderProps>`
 	background-color: #f9f9fb;
 	color: #777980;
 	font-size: 0.775rem;
+	width: ${({ width }) => width || 'auto'};
 `;
 
 export const HeaderItem = styled.span`

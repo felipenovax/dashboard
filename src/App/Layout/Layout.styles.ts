@@ -25,6 +25,6 @@ export const Content = styled.div<DefaultProps>`
 	transition: margin-left 0.5s;
 	padding: 8px;
 	background-color: #fff;
-	height: calc(100vh - 77px);
+	height: 100vh;
 	overflow-y: auto;
 `;

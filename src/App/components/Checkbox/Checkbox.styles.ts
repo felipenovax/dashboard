@@ -33,15 +33,23 @@ export const ContainerCheckbox = styled.input.attrs({ type: 'checkbox' })`
 	place-content: center;
 
 	&:checked {
-		background-color: var(--primary-100);
-		border: 0.15em solid var(--primary-100);
+		background-color: var(--primary);
+		border: 0.15em solid var(--primary);
 	}
 
 	&:before {
 		content: '';
-		width: 0.9em;
-		height: 0.9em;
-		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+		width: 1.5em;
+		height: 1.5em;
+		clip-path: polygon(
+			17% 54%,
+			28% 43%,
+			38% 54%,
+			70% 22%,
+			81% 33%,
+			38% 75%,
+			17% 54%
+		);
 		transform: scale(0);
 		transform-origin: bottom left;
 		transition: 0s transform ease-in-out;
