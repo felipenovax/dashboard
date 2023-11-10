@@ -11,12 +11,13 @@ import {
 } from './Table.styles';
 import { Footer } from './components/Footer/Footer';
 
+type DefaultType = { [key: string]: any };
 interface ITable {
 	headers: { key: string; value: string; width: string }[];
-	rows: { [key: string]: any }[];
+	rows: DefaultType[];
 }
 
-type TableRowsProps = { [key: string]: any }[];
+type TableRowsProps = DefaultType[];
 
 type SortProps = {
 	slug: string;
@@ -30,6 +31,14 @@ export const Table = ({ headers, rows }: ITable) => {
 	});
 	const [tableRows, setTableRows] = useState<TableRowsProps>(rows);
 	const [selectedRows, setSelectedRows] = useState<TableRowsProps>([]);
+
+	const handleSelectRow = (row: DefaultType, state?: boolean) => {
+		if (state) {
+			setSelectedRows([...selectedRows, row]);
+		} else {
+			setSelectedRows(selectedRows.filter((item) => item !== row));
+		}
+	};
 
 	const textContent = (elem: React.ReactElement | string): string => {
 		if (!elem) {
@@ -78,7 +87,7 @@ export const Table = ({ headers, rows }: ITable) => {
 							<TableHeader width="40px">
 								<Checkbox
 									checked={true}
-									onChange={(value) => console.log(value)}
+									onChange={(state) => setSelectedRows(state ? rows : [])}
 								/>
 							</TableHeader>
 							{headers.map((header) => (
@@ -111,8 +120,8 @@ export const Table = ({ headers, rows }: ITable) => {
 							<Row>
 								<td>
 									<Checkbox
-										checked={false}
-										onChange={(value) => console.log(value)}
+										checked={selectedRows.includes(row)}
+										onChange={(state) => handleSelectRow(row, state)}
 									/>
 								</td>
 								{headers.map((header) => (
