@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean;
 	loading: boolean;
+	width?: string;
 	variant: 'primary' | 'default' | 'label' | 'link';
 	size: 'small' | 'medium' | 'large';
 }
@@ -71,8 +72,9 @@ export const Container = styled.button<IButtonProps>`
 	border-radius: 6px;
 	border: ${({ variant }) =>
 		variant === 'label' || variant === 'link' ? 'none' : '1px solid #e5e6e5'};
-	width: max-content;
-	padding: ${({ size }) => sizes[size].padding};
+	width: ${({ width }) => width || 'max-content'};
+	padding: ${({ size, variant }) =>
+		variant === 'link' ? '0' : sizes[size].padding};
 	font-size: ${({ size }) => sizes[size].fontSize};
 	font-weight: ${({ size }) => sizes[size].fontWeight};
 	font-family: inherit;

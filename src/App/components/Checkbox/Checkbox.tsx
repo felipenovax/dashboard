@@ -3,10 +3,11 @@ import { CheckboxForm, ContainerCheckbox } from './Checkbox.styles';
 
 interface ICheckbox {
 	checked?: boolean;
+	size?: 'small' | 'medium' | 'large';
 	onChange: (checked?: boolean) => void;
 }
 
-export const Checkbox = ({ checked, onChange }: ICheckbox) => {
+export const Checkbox = ({ checked, size, onChange }: ICheckbox) => {
 	const checkboxRef = React.useRef<HTMLInputElement>({
 		checked: checked,
 	} as HTMLInputElement);
@@ -14,6 +15,7 @@ export const Checkbox = ({ checked, onChange }: ICheckbox) => {
 	return (
 		<CheckboxForm>
 			<ContainerCheckbox
+				size={size ?? 'medium'}
 				ref={checkboxRef}
 				type="checkbox"
 				name="checkbox"

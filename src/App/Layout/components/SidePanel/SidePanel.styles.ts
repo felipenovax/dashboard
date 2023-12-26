@@ -6,7 +6,7 @@ type DefaultProps = {
 
 type LinkProps = {
 	active?: boolean;
-	preventHover?: boolean;
+	nohover?: boolean;
 };
 
 export const Container = styled.div<DefaultProps>`
@@ -55,10 +55,9 @@ export const Link = styled.a<LinkProps>`
 	}
 
 	&:hover {
-		color: ${({ preventHover }) =>
-			preventHover ? '#818181' : 'var(--primary)'};
-		background-color: ${({ preventHover }) =>
-			preventHover ? 'inherit' : 'var(--primary-hover)'};
+		color: ${({ nohover }) => (nohover ? '#818181' : 'var(--primary)')};
+		background-color: ${({ nohover }) =>
+			nohover ? 'inherit' : 'var(--primary-hover)'};
 	}
 
 	${({ active }) =>

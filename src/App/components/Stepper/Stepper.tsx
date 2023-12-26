@@ -11,6 +11,7 @@ export const Stepper = ({ active, steps, onChange }: IStepper) => {
 		<Wrapper>
 			{steps.map((step: any, index: number) => (
 				<Step
+					key={index}
 					active={index < active}
 					complete={index <= active}
 					last={index + 1 === steps.length}

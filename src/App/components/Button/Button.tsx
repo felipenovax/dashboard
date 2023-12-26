@@ -7,6 +7,7 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	rightIcon?: React.ReactNode;
 	variant?: 'primary' | 'default' | 'label' | 'link';
 	size?: 'small' | 'medium' | 'large';
+	width?: string;
 	loading?: boolean;
 	onClick?: () => void;
 }
@@ -18,6 +19,7 @@ export const Button = ({
 	loading,
 	variant,
 	size,
+	width,
 	onClick,
 	...rest
 }: IButtonProps) => {
@@ -25,6 +27,7 @@ export const Button = ({
 		<Container
 			{...rest}
 			size={size ?? 'medium'}
+			width={width}
 			loading={Boolean(loading)}
 			variant={variant ?? 'default'}
 			onClick={() => onClick && onClick()}

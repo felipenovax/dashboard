@@ -1,5 +1,5 @@
 import React from 'react';
-import { BiCalendar } from 'react-icons/bi';
+import { BiCalendar, BiDotsVerticalRounded } from 'react-icons/bi';
 import { Layout } from './App/Layout/Layout';
 import { Accordion } from './App/components/Accordion/Accordion';
 import { Autocomplete } from './App/components/Autocomplete/Autocomplete';
@@ -27,7 +27,6 @@ function App() {
 					margin: '10px 0',
 				}}
 			>
-				{/* <iframe src="/src/card/index.html" width="485px" height="1000px" /> */}
 				<Button
 					loading={false}
 					disabled={false}
@@ -196,21 +195,46 @@ function App() {
 
 				<Table
 					headers={[
-						{ key: 'client', value: 'Client', width: '190px' },
-						{ key: 'ref', value: 'Case ref', width: '100px' },
+						{ key: 'id', value: 'ID', width: '50px', hidden: true },
+						{
+							key: 'client',
+							value: 'Client',
+							width: '200px',
+							sort: false,
+							pin: true,
+						},
+						{ key: 'ref', value: 'Case ref', width: '100px', copy: true },
 						{ key: 'opened', value: 'Opened at', width: '200px' },
 						{ key: 'date', value: 'Date', width: '200px' },
 						{ key: 'source', value: 'Source', width: '200px' },
 						{ key: 'provider', value: 'Provider', width: '200px' },
 						{ key: 'services', value: 'Services', width: '200px' },
-						{ key: 'value', value: 'Value', width: '90px' },
+						{ key: 'value', value: 'Value', width: '100px' },
+						{
+							key: 'street',
+							value: 'Street',
+							width: '200px',
+							nested: 'healthCenter.address',
+						},
+						{
+							key: 'action',
+							value: '',
+							width: '40px',
+							sort: false,
+						},
 					]}
 					rows={[
 						{
 							client: (
 								<div
 									key="Joao Vicente"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -225,6 +249,15 @@ function App() {
 									</div>
 								</div>
 							),
+							healthCenter: {
+								address: {
+									street: 'Rua dos Bobos',
+									number: '0',
+									city: 'São Paulo',
+									state: 'SP',
+									zipCode: '00000-000',
+								},
+							},
 							ref: 'CC/80564',
 							opened: '04/07/2023',
 							date: '01/07/2023',
@@ -238,12 +271,20 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 1,
 						},
 						{
 							client: (
 								<div
 									key="Maria José"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -271,12 +312,20 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 2,
 						},
 						{
 							client: (
 								<div
 									key="Marcio Ribeiro"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -304,12 +353,20 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 3,
 						},
 						{
 							client: (
 								<div
 									key="Thiago Abravanel"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -337,12 +394,20 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 4,
 						},
 						{
 							client: (
 								<div
 									key="Dorote Menezes"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -370,12 +435,20 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 5,
 						},
 						{
 							client: (
 								<div
 									key="Paulo Ricardo"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -403,12 +476,20 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 6,
 						},
 						{
 							client: (
 								<div
 									key="Benedito Gonçalvez"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -436,12 +517,20 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 7,
 						},
 						{
 							client: (
 								<div
 									key="Benito Soares"
-									style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '6px',
+										cursor: 'pointer',
+									}}
+									onClick={() => setOpen(!open)}
 								>
 									<img
 										src={img}
@@ -469,11 +558,13 @@ function App() {
 								</div>
 							),
 							value: 'R$ 1.000,00',
+							action: <BiDotsVerticalRounded size="22px" cursor="pointer" />,
+							id: 8,
 						},
 					]}
 				/>
 				<Select />
-				<Drawer visible={open} onClose={() => setOpen(false)}>
+				<Drawer visible={open} width="600px" onClose={() => setOpen(false)}>
 					<h1>Drawer</h1>
 				</Drawer>
 			</div>

@@ -58,8 +58,6 @@ export const Select = () => {
 			console.log(top, height, windowHeight);
 			contentRef.current.style.top =
 				top + height > windowHeight ? `-${height + 1}px` : ``;
-			// contentRef.current.style.top =
-			// 	top + height > windowHeight ? `-${height + 1}px` : `-${height}px`;
 
 			const windowWidth = window.innerWidth;
 			contentRef.current.style.left =

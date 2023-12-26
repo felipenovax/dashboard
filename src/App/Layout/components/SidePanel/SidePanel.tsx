@@ -67,11 +67,7 @@ export const SidePanel = ({ open, toggleNav }: SidePanelProps) => {
 	return (
 		<Container id="layout-side-panel" open={open}>
 			<Logo open={open} width="100%" src={open ? LogoIcon : LogoIconSmall} />
-			<Link
-				preventHover
-				href="javascript:void(0)"
-				onClick={() => toggleNav(!open)}
-			>
+			<Link nohover href="javascript:void(0)" onClick={() => toggleNav(!open)}>
 				<span>{open ? <BiX /> : <BiMenu />}</span>
 			</Link>
 			{NavLinks.map(({ href, label, icon: Icon, ...rest }) => (
